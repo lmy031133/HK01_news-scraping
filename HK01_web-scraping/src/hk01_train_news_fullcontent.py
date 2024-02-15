@@ -1,22 +1,8 @@
-#!/usr/bin/env python
-# coding: utf-8
-
 # ## URL to Reference
 # https://pastebin.com/J3HARz0g
 
 # # HK01 News Scraper
 # This notebook outlines the process of scraping news articles from HK01 based on different topic IDs. We extract key details such as article ID, URL, description, publish time, and full content. This script is designed to be a robust and efficient way to gather news data for analysis.
-# 
-
-# In[5]:
-
-
-get_ipython().system('pip install pandas')
-get_ipython().system('pip install requests')
-get_ipython().system('pip install tqdm')
-
-
-# In[6]:
 
 
 import requests  # To make HTTP requests to HK01
@@ -24,9 +10,6 @@ import pandas as pd  # For data manipulation and analysis
 import json  # To parse JSON responses
 import itertools  # For efficient looping
 from tqdm import tqdm  # For displaying progress bars
-
-
-# In[13]:
 
 
 def fetch_news_data(tag_ids: list):
@@ -87,10 +70,6 @@ def fetch_news_data(tag_ids: list):
     # Remove duplicate entries based on articleId
     return df.drop_duplicates(subset=["articleId"])
 
-
-# In[8]:
-
-
 def add_article_summary_and_format_time(df):
     """
     Enhances the DataFrame by adding a summary for each article and formatting the publish time.
@@ -138,9 +117,6 @@ def add_article_summary_and_format_time(df):
     df["publishTime"] = pd.to_datetime(df["publishTime"], unit="s")
 
     return df
-
-
-# In[9]:
 
 
 def extract_and_format_text(df):
@@ -198,9 +174,6 @@ def extract_and_format_text(df):
     return df
 
 
-# In[10]:
-
-
 def output(df, filename):
     """
     Exports the given DataFrame to a CSV file.
@@ -233,35 +206,11 @@ def output(df, filename):
         print(f"Error occurred while saving the file: {e}")
 
 
-# In[11]:
-
-
-def run_this_pipeline(tag_id:list,filename:str):
+def run_this(tag_id:list,filename:str):
     df = fetch_news_data(tag_id)
     df = add_article_summary_and_format_time(df)
     df = extract_and_format_text(df)
     output(df,filename)
-
-
-# In[14]:
-
-
-run_this_pipeline([347,348,15217],"hk01_fulloutput.csv")
-
-
-# In[17]:
-
-
-get_ipython().system('pip install pipreqs')
-
-
-# In[25]:
-
-
-get_ipython().system('pipreqs --encoding utf-8 --force /Users/felixlui/Desktop/Learn/Programming/Project/')
-
-
-# In[ ]:
 
 
 

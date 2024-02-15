@@ -7,3 +7,11 @@ This project is designed to scrape news articles from HK01, focusing specificall
 ## Getting Started
 
 ### Prerequisites
+- Python 3
+
+### Installation
+
+#### Install the required packages:
+<code>pip install -r requirements.txt</code>
+
+
